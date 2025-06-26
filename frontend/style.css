@@ -1,0 +1,252 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code&family=Inter:wght@400;600&display=swap');
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: url('https://i.pinimg.com/736x/e2/27/6c/e2276c48e1b36ba7dc91004987d908cc.jpg') no-repeat center center fixed;
+  background-size: cover;
+  color: #f5f5f5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.chat-container {
+  width: 900px;
+  background: rgba(36, 61, 136, 0.3);
+  padding: 25px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.37);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* Encabezado principal con degradado y bordes azul oscuro */
+h1 {
+  /* Layout */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .75rem;
+
+  /* Tipografía fluida y familia mono */
+  font-family: "Fira Code", monospace;
+  font-weight: 700;
+  font-size: clamp(1.8rem, 2.5vw + 1rem, 3.4rem);
+  line-height: 1.2;
+
+  /* --- Degradado dentro del texto --- */
+  background-image: linear-gradient(
+    135deg,
+    #1e3c72 0%,
+    #2a52be 30%,
+    #5161f6 60%,
+    #1e3c72 100%
+  );
+  background-size: 200% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;          /* hace visible el gradiente */
+
+  /* --- Borde + halo azul oscuro --- */
+  -webkit-text-stroke: 1px #0a1a35;      /* contorno fino */
+  text-shadow:
+    0 0 6px rgba(10, 26, 53, 0.65),      /* glow suave */
+    0 0 12px rgba(10, 26, 53, 0.4);      /* halo extendido */
+
+  /* Box-shadow externo opcional (parece tarjeta) */
+  box-shadow: 0 0 0 2px #0a1a35 inset;   /* línea interior */
+  border-radius: 12px;                   /* esquinas suaves */
+  padding: .25rem .75rem;                /* respiro interna */
+
+  margin: 0 0 1.5rem;
+  transition: background-position 1s ease, text-shadow .3s ease;
+}
+
+/* Animación al pasar el mouse: desplaza el degradado y acentúa el glow */
+h1:hover {
+  background-position: 100% 0;
+  text-shadow:
+    0 0 10px rgba(10, 26, 53, 0.75),
+    0 0 20px rgba(10, 26, 53, 0.6);
+}
+
+
+
+#chat-box {
+  height: 350px;
+  overflow-y: auto;
+  background: rgba(14, 19, 32, 0.25);
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 15px;
+  font-family: 'Fira Code', monospace;
+  font-size: 14px;
+  line-height: 1.4;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.message {
+  margin-bottom: 12px;
+}
+
+.user {
+  color: #61dafb;
+}
+
+.bot {
+  color: #05ff05;
+}
+
+form {
+  display: flex;
+  gap: 10px;
+}
+
+input {
+  flex: 1;
+  padding: 12px 16px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.2); /* sutil contorno */
+  outline: none;
+  background-color: rgba(34, 40, 61, 0.6);
+  color: #ffffff;
+  font-family: 'Fira Code', monospace;
+  font-size: 1rem;
+
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+
+  transition: all 0.3s ease;
+  box-shadow: 0 0 0px transparent;
+}
+
+input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+  font-style: italic;
+}
+
+input:focus {
+  border-color: rgba(0, 132, 255, 0.5);
+  box-shadow: 0 0 8px rgba(0, 132, 255, 0.4);
+  background-color: rgba(34, 40, 61, 0.8);
+}
+
+
+button {
+  position: relative;
+  background: rgba(13, 71, 161, 0.85); /* deep blue */
+  padding: 10px 15px;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #eaf2ff;
+  font-weight: bold;
+  font-family: 'Lato', sans-serif;
+  transition: background 0.3s ease;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  background-clip: padding-box;
+  overflow: hidden;
+}
+
+button::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 2px; /* ancho del borde */
+  background: linear-gradient(130deg, #0d47a1, #1976d2, #64b5f6, #0d47a1);
+  background-size: 300% 300%;
+  animation: movingBorder 6s linear infinite;
+  mask: 
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+
+@keyframes movingBorder {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+button:hover {
+  background: rgba(11, 60, 145, 0.9);
+}
+
+
+.message {
+  display: flex;
+  margin-bottom: 12px;
+}
+
+.user {
+  justify-content: flex-end;
+}
+
+.bot {
+  justify-content: flex-start;
+}
+
+.icon{
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+
+}
+
+.bubble {
+  max-width: 75%;
+  padding: 10px 15px;
+  border-radius: 16px;
+  font-size: 14px;
+  line-height: 1.4;
+  word-wrap: break-word;
+  position: relative;
+}
+
+.user-bubble {
+  background-color: rgba(97, 218, 251, 0.1);
+  border: 1px solid #61dafb;
+  color: #61dafb;
+  border-bottom-right-radius: 0;
+}
+
+.bot-bubble {
+  background-color: rgba(144, 238, 144, 0.1);
+  border: 1px solid #4b4942;
+  color: #ffffff;
+  border-bottom-left-radius: 0;
+}
+
+.error {
+  border: 1px solid #ff4d4d;
+  color: #ff4d4d;
+}
+
+.typing .dot {
+  animation: blink 1s infinite;
+  font-weight: bold;
+}
+
+.typing .dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.typing .dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 1; }
+}
